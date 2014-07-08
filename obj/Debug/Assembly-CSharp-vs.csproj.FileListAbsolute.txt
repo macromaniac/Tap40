@@ -1,0 +1,11 @@
+C:\git\Tap40\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
+C:\git\Tap40\Temp\bin\Debug\Assembly-CSharp.dll
+C:\git\Tap40\Temp\bin\Debug\Assembly-CSharp.pdb
+C:\git\Tap40\Temp\bin\Debug\UnityEditor.dll
+C:\git\Tap40\Temp\bin\Debug\UnityEngine.dll
+C:\git\Tap40\Temp\bin\Debug\Mono.Cecil.dll
+C:\git\Tap40\Temp\bin\Debug\nunit.framework.dll
+C:\git\Tap40\Temp\bin\Debug\Unity.DataContract.dll
+C:\git\Tap40\Temp\bin\Debug\ICSharpCode.NRefactory.dll
+C:\git\Tap40\obj\Debug\Assembly-CSharp.dll
+C:\git\Tap40\obj\Debug\Assembly-CSharp.pdb
