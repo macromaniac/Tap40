@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
+using UnityEngine;
 public class BoardMan {
 	private System.Random random;
 	public static float widthScale = 1f;
@@ -43,6 +44,7 @@ public class BoardMan {
 			potentialTarget = new Target(randXWithinBounds(), randYWithinBounds());
 		} while (IsTargetIntersectingOtherTargets(potentialTarget));
 		Target newTarget = new Target(potentialTarget.circleX, potentialTarget.circleY);
+		newTarget.makeGraphic();
 		targetList.Add(newTarget);
 	}
 	public void AdvanceBoard() { 

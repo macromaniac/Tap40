@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
+using UnityEngine;
 
 public enum HitResponse { Hit, Missed, IsStillBeingLoaded };
 public class Target {
@@ -9,16 +10,27 @@ public class Target {
 
 	private int delayFramesBeforeClickable = 5;
 	public float circleX, circleY;
-	protected int targetState;
+	private int targetState;
 	private int clickableAfterFrameNumber = 0;
+
+	private TargetGraphicShell targetGraphic;
+
 	public Target(float x, float y) {
-		targetState = GameMan.numTargetsDisplayed;
 		this.circleX = x; this.circleY = y;
+		targetState = GameMan.numTargetsDisplayed;
+		targetGraphic = new TargetGraphicShell(circleX, circleY);
+	}
+	public void makeGraphic() {
+#if IS_SERVER
+#else
+		targetGraphic = new TargetGraphic(circleX, circleY);
+#endif
+		targetGraphic.AdvanceActiveState(targetState);
 	}
 	private bool IsPointWithinTarget(float pointX, float pointY) {
 		//if the distance from the center of the circle to the point is
 		//less than the radius then the point is within the target
-		return (distance(pointX,pointY,circleX,circleY) < relativeCircleRadius);
+		return (distance(pointX, pointY, circleX, circleY) < relativeCircleRadius);
 	}
 
 	public bool IsTargetIntersecting(Target target) {
@@ -46,6 +58,10 @@ public class Target {
 			clickableAfterFrameNumber = frameAt + delayFramesBeforeClickable;
 		UpdateTargetGraphic();
 	}
-	protected virtual void UpdateTargetGraphic() { }
-	public virtual void ExplosionGraphics() { }
+	public void UpdateTargetGraphic() {
+		targetGraphic.AdvanceActiveState(targetState);
+	}
+	public void ExplosionGraphics() {
+		targetGraphic.Explode();
+	}
 }

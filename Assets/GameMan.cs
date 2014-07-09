@@ -22,7 +22,6 @@ public class GameMan {
 
 	System.Random random;
 
-	private int currentFrameAt = 0;
 	private int numTargetsLeft = 40;
 	private BoardMan boardMan;
 
