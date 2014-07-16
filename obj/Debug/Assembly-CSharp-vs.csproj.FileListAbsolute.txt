@@ -8,3 +8,4 @@ C:\git\Tap40\Temp\bin\Debug\Unity.DataContract.dll
 C:\git\Tap40\Temp\bin\Debug\ICSharpCode.NRefactory.dll
 C:\git\Tap40\obj\Debug\Assembly-CSharp.dll
 C:\git\Tap40\obj\Debug\Assembly-CSharp.pdb
+C:\git\Tap40\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache

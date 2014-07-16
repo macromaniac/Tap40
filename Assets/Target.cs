@@ -42,7 +42,7 @@ public class Target {
 		double distY = aY - bY;
 		return (float)Math.Sqrt(distX * distX + distY * distY);
 	}
-	public virtual HitResponse GetHitResponse(int frameAt, float pointX, float pointY) {
+	public HitResponse GetHitResponse(int frameAt, float pointX, float pointY) {
 		if (IsPointWithinTarget(pointX, pointY) == true)
 			if (clickableAfterFrameNumber < frameAt)
 				return HitResponse.Hit;
@@ -62,11 +62,11 @@ public class Target {
 	public void UpdateTargetGraphic() {
 		targetGraphic.AdvanceActiveState(targetState);
 	}
-	public virtual bool TryToExplode() {
+	public bool TryToExplode() {
 		targetGraphic.Explode();
 		return true;
 	}
-	public virtual float getAcceptableSpawnRadius() {
+	public float getAcceptableSpawnRadius() {
 		return relativeCircleRadius;
 	}
 }
