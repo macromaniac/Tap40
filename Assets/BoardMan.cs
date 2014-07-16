@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-using UnityEngine;
 public class BoardMan {
 	private System.Random random;
 	public static float widthScale = 1f;
@@ -28,15 +27,15 @@ public class BoardMan {
 		return false;
 	}
 
-	private float randXWithinBounds(float spawnRadius) {
-		float lowerBoundCircleX = spawnRadius;
-		float upperBoundCircleX = BoardMan.widthScale - spawnRadius;
+	private float randXWithinBounds() {
+		float lowerBoundCircleX = Target.relativeCircleRadius;
+		float upperBoundCircleX = BoardMan.widthScale - Target.relativeCircleRadius;
 		return (float)((upperBoundCircleX - lowerBoundCircleX) * random.NextDouble() + lowerBoundCircleX);
 
 	}
-	private float randYWithinBounds(float spawnRadius) {
-		float lowerBoundCircleY = spawnRadius;
-		float upperBoundCircleY = BoardMan.heightScale - spawnRadius;
+	private float randYWithinBounds() {
+		float lowerBoundCircleY = Target.relativeCircleRadius;
+		float upperBoundCircleY = BoardMan.heightScale - Target.relativeCircleRadius;
 		return (float)((upperBoundCircleY - lowerBoundCircleY) * random.NextDouble() + lowerBoundCircleY);
 	}
 	public void AddTarget() {
@@ -44,8 +43,8 @@ public class BoardMan {
 		do {
 			potentialTarget =
 				new Target(
-					randXWithinBounds(Target.relativeCircleRadius),
-					randYWithinBounds(Target.relativeCircleRadius),
+					randXWithinBounds(),
+					randYWithinBounds(),
 					frameAt);
 		} while (IsTargetIntersectingOtherTargets(potentialTarget));
 		Target newTarget =
@@ -59,6 +58,8 @@ public class BoardMan {
 	}
 
 	public HitResponse processHit(float x, float y) {
+		if (targetList.Count == 0)
+			return HitResponse.Missed;
 		return targetList[0].GetHitResponse(frameAt, x, y);
 	}
 }

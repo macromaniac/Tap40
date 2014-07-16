@@ -58,7 +58,7 @@ public class TargetGraphic : TargetGraphicShell {
 
 		if (targetState == 1) {
 			target.GetComponent<SpriteRenderer>().color = Color.red;
-			scale = .9f;
+			scale = .95f;
 		}
 		if (targetState == 2) {
 			target.GetComponent<SpriteRenderer>().color = Color.yellow;

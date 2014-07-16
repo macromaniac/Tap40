@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-//Just for Debug
-using UnityEngine;
 
 
 public enum GameState { Playing, Won, Lost, Disconnected };
