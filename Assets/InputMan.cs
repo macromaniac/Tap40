@@ -19,7 +19,7 @@ public class InputMan : MonoBehaviour {
 	void Update() {
 		if (Input.GetMouseButtonDown(0))
 			wasMousePressed = true;
-		if (Input.touchCount > 0) {
+		if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began) {
 			wasTouched = true;
 			touchedLast = new Vector3(Input.touches[0].position.x, Input.touches[0].position.y, 0f);
 		}
