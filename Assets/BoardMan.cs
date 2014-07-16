@@ -38,17 +38,18 @@ public class BoardMan {
 		float upperBoundCircleY = BoardMan.heightScale - Target.relativeCircleRadius;
 		return (float)((upperBoundCircleY - lowerBoundCircleY) * random.NextDouble() + lowerBoundCircleY);
 	}
-	public void AddTarget() {
+	public void AddTarget(int targetNum) {
 		Target potentialTarget;
 		do {
 			potentialTarget =
 				new Target(
 					RandXWithinBounds(),
 					RandYWithinBounds(),
-					frameAt);
+					frameAt, targetNum);
 		} while (IsTargetIntersectingOtherTargets(potentialTarget));
 		Target newTarget =
-			new Target(potentialTarget.circleX, potentialTarget.circleY, frameAt);
+			new Target(potentialTarget.circleX, potentialTarget.circleY, frameAt,
+				targetNum);
 		newTarget.makeGraphic();
 		targetList.Add(newTarget);
 	}

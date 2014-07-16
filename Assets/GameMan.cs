@@ -29,7 +29,7 @@ public class GameMan {
 	public List<InputFrame> inputFrameList;
 
 	private void AddTargetToBoard() {
-		boardMan.AddTarget();
+		boardMan.AddTarget(numTargetsLeft);
 		numTargetsLeft--;
 	}
 	public GameMan(System.Random random) {

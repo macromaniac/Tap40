@@ -29,13 +29,13 @@ class GameCalculator {
 	public float GetTime() {
 		return gameMan.GetTime();
 	}
-	public int getCircleOn() { // this function is used to keep track of the enemy
+	public int GetCircleOn() { // this function is used to keep track of the enemy
 		return 0;
 	}
 
 	//NOTE: -1 = DID NOT FINISH
 	// -2 = INCONSISTENCY
-	public static float getWinTime(System.Random random, List<InputFrame> keyFrames) {
+	public static float GetWinTime(System.Random random, List<InputFrame> keyFrames) {
 		GameCalculator gameCalculator = new GameCalculator(Utility.DeepClone<System.Random>(random));
 		if (!gameCalculator.AddKeyFrames(keyFrames))
 			return -2f;

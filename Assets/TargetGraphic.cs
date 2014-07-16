@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TargetGraphic : TargetGraphicShell {
 	GameObject target;
+	TargetGraphicScript script;
 	PointMapper pointMapper;
 	float scale = 1f;
+	int targetState = GameMan.numTargetsDisplayed + 1;
 
-	private Vector3 universalCircleRadius {
+	private Vector3 UniversalCircleRadius {
 		get {
 			PointMapper mapper = PointMapper.Get();
 			// X/Y Edge of a circle at Relative Origin
@@ -24,37 +26,42 @@ public class TargetGraphic : TargetGraphicShell {
 		}
 	}
 
-	private Vector3 universalCircleScale {
+	private Vector3 UniversalCircleScale {
 		get {
-			return new Vector3(universalCircleRadius.x * 2, universalCircleRadius.y * 2, 1f);
+			return new Vector3(UniversalCircleRadius.x * 2, UniversalCircleRadius.y * 2, 1f);
 		}
 	}
 
-	private GameObject findGameObjectToCopy() {
+	private GameObject FindGameObjectToCopy() {
 		return GameObject.Find("TargetBase");
 	}
 
-	private void positionGraphic() {
+	private void PositionGraphic() {
 		Vector3 centerVector = new Vector3(circleX, circleY, 0f);
 		Vector3 pos = PointMapper.Get().GetWorldPointFromRelativePoint(centerVector);
 		target.transform.position = pos;
 	}
 
-	private void updateScale() {
-		target.transform.localScale = universalCircleScale * scale;
+	private void UpdateScale() {
+		target.transform.localScale = UniversalCircleScale * scale;
 	}
 
-	public TargetGraphic(float circleX, float circleY)
-		: base(circleX, circleY) {
+	public TargetGraphic(float circleX, float circleY, int targetNum)
+		: base(circleX, circleY, targetNum) {
 
-		GameObject targetGraphicBase = findGameObjectToCopy();
+		GameObject targetGraphicBase = FindGameObjectToCopy();
 		target = (GameObject)GameObject.Instantiate(targetGraphicBase);
+		script = target.GetComponent<TargetGraphicScript>();
+		script.Init(targetNum);
 		target.SetActive(true);
-		positionGraphic();
-		updateScale();
+		PositionGraphic();
+		UpdateScale();
 	}
 
-	public override void AdvanceActiveState(int targetState) {
+	public override void AdvanceActiveState() {
+
+		targetState--;
+		script.IncrementState();
 
 		if (targetState == 1) {
 			target.GetComponent<SpriteRenderer>().color = Color.red;
@@ -68,11 +75,7 @@ public class TargetGraphic : TargetGraphicShell {
 			target.GetComponent<SpriteRenderer>().color = Color.grey;
 			scale = .3f;
 		}
-		if (targetState == 4) {
-			target.GetComponent<SpriteRenderer>().color = Color.white;
-			scale = .2f;
-		}
-		updateScale();
+		UpdateScale();
 	}
 	public override void Explode() {
 		GameObject.Destroy(target);

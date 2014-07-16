@@ -7,25 +7,26 @@ public enum HitResponse { Hit, Missed, IsStillBeingLoaded };
 public class Target {
 	public static float relativeCircleRadius = 1f / (3.25f * 2f);
 
-	private int delayFramesBeforeClickable = 5;
+	private int delayFramesBeforeClickable = 1;
 	public float circleX, circleY;
-	protected int targetState;
+	private int targetState;
+	private int targetNum;
 	private int clickableAfterFrameNumber = 0;
 
 	protected TargetGraphicShell targetGraphic;
 
 	protected int frameSpawned;
-	public Target(float x, float y, int frameSpawned) {
-		this.circleX = x; this.circleY = y; this.frameSpawned = frameSpawned;
+	public Target(float x, float y, int frameSpawned, int targetNum) {
+		this.circleX = x; this.circleY = y; this.frameSpawned = frameSpawned; this.targetNum = targetNum;
 		targetState = GameMan.numTargetsDisplayed;
-		targetGraphic = new TargetGraphicShell(circleX, circleY);
+		targetGraphic = new TargetGraphicShell(circleX, circleY, targetNum);
 	}
 	public virtual void makeGraphic() {
 #if IS_SERVER
 #else
-		targetGraphic = new TargetGraphic(circleX, circleY);
+		targetGraphic = new TargetGraphic(circleX, circleY, targetNum);
 #endif
-		targetGraphic.AdvanceActiveState(targetState);
+		targetGraphic.AdvanceActiveState();
 	}
 	private bool IsPointWithinTarget(float pointX, float pointY) {
 		//if the distance from the center of the circle to the point is
@@ -59,7 +60,7 @@ public class Target {
 		UpdateTargetGraphic();
 	}
 	public void UpdateTargetGraphic() {
-		targetGraphic.AdvanceActiveState(targetState);
+		targetGraphic.AdvanceActiveState();
 	}
 	public bool TryToExplode() {
 		targetGraphic.Explode();

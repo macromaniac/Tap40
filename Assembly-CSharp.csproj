@@ -54,6 +54,7 @@
      <Compile Include="Assets\PointMapper.cs" />
      <Compile Include="Assets\Target.cs" />
      <Compile Include="Assets\TargetGraphic.cs" />
+     <Compile Include="Assets\TargetGraphicScript.cs" />
      <Compile Include="Assets\TargetGraphicShell.cs" />
      <Compile Include="Assets\Utility.cs" />
   </ItemGroup>
