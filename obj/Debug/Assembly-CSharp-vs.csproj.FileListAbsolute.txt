@@ -1,4 +1,3 @@
-C:\git\Tap40\obj\Debug\Assembly-CSharp-vs.csprojResolveAssemblyReference.cache
 C:\git\Tap40\Temp\bin\Debug\Assembly-CSharp.dll
 C:\git\Tap40\Temp\bin\Debug\Assembly-CSharp.pdb
 C:\git\Tap40\Temp\bin\Debug\UnityEditor.dll

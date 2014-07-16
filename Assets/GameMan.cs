@@ -25,7 +25,7 @@ public class GameMan {
 	private int numTargetsLeft = 40;
 	private BoardMan boardMan;
 
-	public static int numTargetsDisplayed = 4;
+	public static int numTargetsDisplayed = 3;
 	public GameState gameState;
 
 
@@ -58,10 +58,11 @@ public class GameMan {
 				gameState = GameState.Lost;
 			}
 			if (resp == HitResponse.Hit) {
-				boardMan.ExplodeTarget();
-				boardMan.AdvanceBoard();
-				if (numTargetsLeft > 0) {
-					AddTargetToBoard();
+				if (boardMan.TryToExplodeTarget()) {
+					boardMan.AdvanceBoard();
+					if (numTargetsLeft > 0) {
+						AddTargetToBoard();
+					}
 				}
 			}
 		}

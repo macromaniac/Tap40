@@ -6,21 +6,22 @@ using UnityEngine;
 
 public enum HitResponse { Hit, Missed, IsStillBeingLoaded };
 public class Target {
-	public static float relativeCircleRadius = 1f / (5f * 2f);
+	public static float relativeCircleRadius = 1f / (3.25f * 2f);
 
 	private int delayFramesBeforeClickable = 5;
 	public float circleX, circleY;
-	private int targetState;
+	protected int targetState;
 	private int clickableAfterFrameNumber = 0;
 
-	private TargetGraphicShell targetGraphic;
+	protected TargetGraphicShell targetGraphic;
 
-	public Target(float x, float y) {
-		this.circleX = x; this.circleY = y;
+	protected int frameSpawned;
+	public Target(float x, float y, int frameSpawned) {
+		this.circleX = x; this.circleY = y; this.frameSpawned = frameSpawned;
 		targetState = GameMan.numTargetsDisplayed;
 		targetGraphic = new TargetGraphicShell(circleX, circleY);
 	}
-	public void makeGraphic() {
+	public virtual void makeGraphic() {
 #if IS_SERVER
 #else
 		targetGraphic = new TargetGraphic(circleX, circleY);
@@ -33,15 +34,15 @@ public class Target {
 		return (distance(pointX, pointY, circleX, circleY) < relativeCircleRadius);
 	}
 
-	public bool IsTargetIntersecting(Target target) {
-		return distance(target.circleX, target.circleY, circleX, circleY) < 2 * relativeCircleRadius;
+	public virtual bool IsTargetSpawnIntersecting(Target target) {
+		return distance(target.circleX, target.circleY, circleX, circleY) < 2 * getAcceptableSpawnRadius();
 	}
-	private float distance(float aX, float aY, float bX, float bY) {
+	protected float distance(float aX, float aY, float bX, float bY) {
 		double distX = aX - bX;
 		double distY = aY - bY;
 		return (float)Math.Sqrt(distX * distX + distY * distY);
 	}
-	public HitResponse GetHitResponse(int frameAt, float pointX, float pointY) {
+	public virtual HitResponse GetHitResponse(int frameAt, float pointX, float pointY) {
 		if (IsPointWithinTarget(pointX, pointY) == true)
 			if (clickableAfterFrameNumber < frameAt)
 				return HitResponse.Hit;
@@ -61,7 +62,11 @@ public class Target {
 	public void UpdateTargetGraphic() {
 		targetGraphic.AdvanceActiveState(targetState);
 	}
-	public void ExplosionGraphics() {
+	public virtual bool TryToExplode() {
 		targetGraphic.Explode();
+		return true;
+	}
+	public virtual float getAcceptableSpawnRadius() {
+		return relativeCircleRadius;
 	}
 }

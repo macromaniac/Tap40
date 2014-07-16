@@ -52,6 +52,7 @@
      <Compile Include="Assets\GameMan.cs" />
      <Compile Include="Assets\InputMan.cs" />
      <Compile Include="Assets\PointMapper.cs" />
+     <Compile Include="Assets\SpinningNestedTarget.cs" />
      <Compile Include="Assets\Target.cs" />
      <Compile Include="Assets\TargetGraphic.cs" />
      <Compile Include="Assets\TargetGraphicShell.cs" />
