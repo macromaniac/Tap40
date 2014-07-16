@@ -9,15 +9,15 @@ public class TargetGraphic : TargetGraphicShell {
 
 	private Vector3 universalCircleRadius {
 		get {
-			PointMapper mapper = PointMapper.get();
+			PointMapper mapper = PointMapper.Get();
 			// X/Y Edge of a circle at Relative Origin
 			Vector3 circleXYEdgePosition =
-				mapper.getWorldPointFromRelativePoint(new Vector3(Target.relativeCircleRadius,
+				mapper.GetWorldPointFromRelativePoint(new Vector3(Target.relativeCircleRadius,
 					Target.relativeCircleRadius, 0f));
 
 			//Center of a circle at Relative Origin
 			Vector3 circleCenterPosition =
-				mapper.getWorldPointFromRelativePoint(new Vector3(0f, 0f, 0f));
+				mapper.GetWorldPointFromRelativePoint(new Vector3(0f, 0f, 0f));
 
 			//return radius of circle
 			return (circleXYEdgePosition - circleCenterPosition);
@@ -36,7 +36,7 @@ public class TargetGraphic : TargetGraphicShell {
 
 	private void positionGraphic() {
 		Vector3 centerVector = new Vector3(circleX, circleY, 0f);
-		Vector3 pos = PointMapper.get().getWorldPointFromRelativePoint(centerVector);
+		Vector3 pos = PointMapper.Get().GetWorldPointFromRelativePoint(centerVector);
 		target.transform.position = pos;
 	}
 

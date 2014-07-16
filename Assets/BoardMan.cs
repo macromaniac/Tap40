@@ -27,13 +27,13 @@ public class BoardMan {
 		return false;
 	}
 
-	private float randXWithinBounds() {
+	private float RandXWithinBounds() {
 		float lowerBoundCircleX = Target.relativeCircleRadius;
 		float upperBoundCircleX = BoardMan.widthScale - Target.relativeCircleRadius;
 		return (float)((upperBoundCircleX - lowerBoundCircleX) * random.NextDouble() + lowerBoundCircleX);
 
 	}
-	private float randYWithinBounds() {
+	private float RandYWithinBounds() {
 		float lowerBoundCircleY = Target.relativeCircleRadius;
 		float upperBoundCircleY = BoardMan.heightScale - Target.relativeCircleRadius;
 		return (float)((upperBoundCircleY - lowerBoundCircleY) * random.NextDouble() + lowerBoundCircleY);
@@ -43,8 +43,8 @@ public class BoardMan {
 		do {
 			potentialTarget =
 				new Target(
-					randXWithinBounds(),
-					randYWithinBounds(),
+					RandXWithinBounds(),
+					RandYWithinBounds(),
 					frameAt);
 		} while (IsTargetIntersectingOtherTargets(potentialTarget));
 		Target newTarget =
@@ -57,9 +57,13 @@ public class BoardMan {
 			target.TargetStateAdvance(frameAt);
 	}
 
-	public HitResponse processHit(float x, float y) {
+	public HitResponse ProcessHit(float x, float y) {
 		if (targetList.Count == 0)
 			return HitResponse.Missed;
 		return targetList[0].GetHitResponse(frameAt, x, y);
+	}
+
+	public int NumTargetsLeft() {
+		return targetList.Count;
 	}
 }

@@ -26,12 +26,14 @@ public class GameMan {
 	public static int numTargetsDisplayed = 3;
 	public GameState gameState;
 
+	public List<InputFrame> inputFrameList;
 
 	private void AddTargetToBoard() {
 		boardMan.AddTarget();
 		numTargetsLeft--;
 	}
 	public GameMan(System.Random random) {
+		inputFrameList = new List<InputFrame>();
 		this.random = random;
 		boardMan = new BoardMan(random);
 		for (int i = 0; i < numTargetsDisplayed; ++i) {
@@ -41,7 +43,8 @@ public class GameMan {
 		gameState = GameState.Playing;
 	}
 
-	public void acceptInput(InputFrame inputFrame) {
+	public void AcceptInput(InputFrame inputFrame) {
+		inputFrameList.Add(inputFrame);
 		//if (gameState != GameState.Playing)
 		//	return;
 
@@ -51,7 +54,7 @@ public class GameMan {
 		boardMan.frameAt = inputFrame.frameNumber;
 
 		if (inputFrame.hasInput) {
-			HitResponse resp = boardMan.processHit(inputFrame.x, inputFrame.y);
+			HitResponse resp = boardMan.ProcessHit(inputFrame.x, inputFrame.y);
 			if (resp == HitResponse.Missed) {
 				gameState = GameState.Lost;
 			}
@@ -62,8 +65,15 @@ public class GameMan {
 						AddTargetToBoard();
 					}
 				}
+				if (boardMan.NumTargetsLeft() == 0)
+					gameState = GameState.Won;
 			}
 		}
+	}
+
+	float frameLength = 0.02f;
+	public float GetTime() {
+		return boardMan.frameAt * frameLength;
 	}
 
 }

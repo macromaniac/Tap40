@@ -20,14 +20,14 @@ public class PointMapper : MonoBehaviour {
 		if (wasMouseReleased) {
 			wasMouseReleased = false;
 			Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Vector3 relPoint = getRelativePointFromWorldPoint(worldPoint);
-			Vector3 worldFromRelPoint = getWorldPointFromRelativePoint(relPoint);
+			Vector3 relPoint = GetRelativePointFromWorldPoint(worldPoint);
+			Vector3 worldFromRelPoint = GetWorldPointFromRelativePoint(relPoint);
 
 		}
 	}
 
 	//NOTE: ROUNDING PREVENTS IT FROM BEING A TRUE INVERSION
-	public Vector3 getRelativePointFromWorldPoint(Vector3 worldPoint) {
+	public Vector3 GetRelativePointFromWorldPoint(Vector3 worldPoint) {
 
 		Vector3 relativeFromOrigin = worldPoint - gameObject.transform.position;
 
@@ -39,7 +39,7 @@ public class PointMapper : MonoBehaviour {
 			0f);
 	}
 
-	public Vector3 getWorldPointFromRelativePoint(Vector3 relativePoint) {
+	public Vector3 GetWorldPointFromRelativePoint(Vector3 relativePoint) {
 		Vector3 unscaledRel = new Vector3(relativePoint.x / BoardMan.widthScale,
 			relativePoint.y / BoardMan.heightScale,
 			0f);
@@ -55,7 +55,7 @@ public class PointMapper : MonoBehaviour {
 	}
 
 	static PointMapper pointMapper = null;
-	public static PointMapper get(){
+	public static PointMapper Get(){
 		if (pointMapper == null)
 			pointMapper = GameObject.Find("PointMapper").GetComponent<PointMapper>();
 		return pointMapper;
