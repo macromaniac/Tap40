@@ -49,13 +49,12 @@ public class TargetGraphic : TargetGraphicShell {
 	public TargetGraphic(float circleX, float circleY, int targetNum)
 		: base(circleX, circleY, targetNum) {
 
-		GameObject targetGraphicBase = FindGameObjectToCopy();
-		target = (GameObject)GameObject.Instantiate(targetGraphicBase);
-		script = target.GetComponent<TargetGraphicScript>();
-		script.Init(targetNum);
-		target.SetActive(true);
-		PositionGraphic();
-		UpdateScale();
+			target = (GameObject)GameObject.Instantiate(Player.Get(0).GetInstantiableTarget());
+			script = target.GetComponent<TargetGraphicScript>();
+			script.Init(targetNum);
+			target.SetActive(true);
+			PositionGraphic();
+			UpdateScale();
 	}
 
 	public override void AdvanceActiveState() {

@@ -6,25 +6,6 @@ using System.Collections;
 
 public class PointMapper : MonoBehaviour {
 
-	// Use this for initialization
-	void Start() {
-
-	}
-
-	bool wasMouseReleased = false;
-	void Update() {
-		if (Input.GetMouseButtonUp(0))
-			wasMouseReleased = true;
-	}
-	void FixedUpdate() {
-		if (wasMouseReleased) {
-			wasMouseReleased = false;
-			Vector3 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Vector3 relPoint = GetRelativePointFromWorldPoint(worldPoint);
-			Vector3 worldFromRelPoint = GetWorldPointFromRelativePoint(relPoint);
-
-		}
-	}
 
 	//NOTE: ROUNDING PREVENTS IT FROM BEING A TRUE INVERSION
 	public Vector3 GetRelativePointFromWorldPoint(Vector3 worldPoint) {

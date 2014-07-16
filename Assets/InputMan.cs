@@ -28,7 +28,6 @@ public class InputMan : MonoBehaviour {
 	private void ProcessInput(Vector3 input) {
 		Vector3 worldPoint = Camera.main.ScreenToWorldPoint(input);
 		Vector3 relPoint = pointMapper.GetRelativePointFromWorldPoint(worldPoint);
-		Vector3 worldFromRelPoint = pointMapper.GetWorldPointFromRelativePoint(relPoint);
 		gameMan.AcceptInput(new InputFrame(frameAt, relPoint.x, relPoint.y));
 	}
 	void FixedUpdate() {

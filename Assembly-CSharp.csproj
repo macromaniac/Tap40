@@ -47,15 +47,23 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BoardMan.cs" />
-     <Compile Include="Assets\ClockMan.cs" />
+     <Compile Include="Assets\CharGFX.cs" />
      <Compile Include="Assets\GameCalculator.cs" />
      <Compile Include="Assets\GameMan.cs" />
      <Compile Include="Assets\InputMan.cs" />
+     <Compile Include="Assets\NormalTargetGraphicScript.cs" />
+     <Compile Include="Assets\PersistantGameData.cs" />
+     <Compile Include="Assets\Player.cs" />
      <Compile Include="Assets\PointMapper.cs" />
+     <Compile Include="Assets\ResourceMan.cs" />
      <Compile Include="Assets\Target.cs" />
      <Compile Include="Assets\TargetGraphic.cs" />
      <Compile Include="Assets\TargetGraphicScript.cs" />
      <Compile Include="Assets\TargetGraphicShell.cs" />
+     <Compile Include="Assets\TargetGraphicTester.cs" />
+     <Compile Include="Assets\Tween\BaseTweenObject.cs" />
+     <Compile Include="Assets\Tween\TweenInterface.cs" />
+     <Compile Include="Assets\Tween\UnityTween.cs" />
      <Compile Include="Assets\Utility.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -3,14 +3,14 @@ using System.Collections;
 
 public class TargetGraphicScript : MonoBehaviour {
 
-	int currentState, targetNum;
+	protected int currentState, targetNum;
 
-	public void Init(int targetNum) {
+	public virtual void Init(int targetNum) {
 		this.targetNum = targetNum;
 		this.currentState = GameMan.numTargetsDisplayed + 1;
 	}
 
-	public void IncrementState() {
+	public virtual void IncrementState() {
 		currentState--;
 	}
 	

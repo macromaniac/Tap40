@@ -18,9 +18,9 @@ public class InputFrame {
 }
 public class GameMan {
 
-	System.Random random;
 
-	private int numTargetsLeft = 40;
+	private static int numTargetsStarting = 30;
+	private int numTargetsLeft = numTargetsStarting;
 	private BoardMan boardMan;
 
 	public static int numTargetsDisplayed = 3;
@@ -29,12 +29,11 @@ public class GameMan {
 	public List<InputFrame> inputFrameList;
 
 	private void AddTargetToBoard() {
-		boardMan.AddTarget(numTargetsLeft);
+		boardMan.AddTarget(numTargetsStarting - numTargetsLeft);
 		numTargetsLeft--;
 	}
 	public GameMan(System.Random random) {
 		inputFrameList = new List<InputFrame>();
-		this.random = random;
 		boardMan = new BoardMan(random);
 		for (int i = 0; i < numTargetsDisplayed; ++i) {
 			boardMan.AdvanceBoard();

@@ -15,4 +15,5 @@ public class Utility {
 			return (T)formatter.Deserialize(ms);
 		}
 	}
+
 }
